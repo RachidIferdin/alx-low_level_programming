@@ -1,5 +1,9 @@
-#infdef MAIN_H
+#ifndef MAIN_H
 #define MAIN_M
+#include <stdio.h>
+
+/*functions prototypes*/
+
 int _putchar(char c);
 int _islower(int c);
 int _isalpha(int c);
