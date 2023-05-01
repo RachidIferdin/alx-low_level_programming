@@ -1,39 +1,32 @@
 #include "lists.h"
+
 /**
- * find_listint_loop - finds the loop contained
- *                     in a linked list
- * @head : pointer to the head of the linked list
- * Return: pointer the node where the loop starts,
- *         or NULL - if there is no loop
+ * add_nodeint_end - adds a node to the end of a linked list
+ * @head: pointer to the head of the list
+ * @n: number to be used as content
+ *
+ * Return: address of the newly added node
  */
-listint_t *find_listint_loop(listint_t *head)
+listint_t *add_nodeint_end(listint_t **head, const int n)
 {
-listint_t *node1, *node2;
+	listint_t *new_node;
+	listint_t *cursor = *head;
 
-if (head == NULL || head->next == NULL)
-return (NULL);
-
-node1 = head->next;
-node2 = (head->next)->next;
-
-while (node2)
-{
-if (node1 == node2)
-{
-node1 = head;
-
-while (node1 != node2)
-{
-node1 = node1->next;
-node2 = node2->next;
-}
-
-return (node1);
-}
-
-node1 = node1->next;
-node2 = (node2->next)->next;
-}
-
-return (NULL);
+	new_node = malloc(sizeof(listint_t));
+	if (new_node != NULL)
+	{
+		new_node->n = n;
+		new_node->next = NULL;
+	}
+	else
+		return (NULL);
+	if (cursor != NULL)
+	{
+		while (cursor->next != NULL)
+			cursor = cursor->next;
+		cursor->next = new_node;
+	}
+	else
+		*head = new_node;
+	return (new_node);
 }
